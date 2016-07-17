@@ -14,11 +14,10 @@ CHAR [\+\-$?_a-zA-Z]
 %%
 "("                                 { return LEFT_PAREN; }
 ")"                                 { return RIGHT_PAREN; }
-"true"                              { return yylval.bool_val = true; }
-"false"                             { return yylval.bool_val = false; }
+"true"                              { yylval.bool_val = true; return VALUE_BOOL; }
+"false"                             { yylval.bool_val = false; return VALUE_BOOL; }
 
-{DIGIT}+\.{DIGIT}+                  { yylval.double_val = atof(yytext); return VALUE_DOUBLE; }
-{DIGIT}+                            { yylval.int_val = atoi(yytext); return VALUE_DOUBLE; }
+({DIGIT})?+(\.{DIGIT}+)?            { yylval.double_val = atof(yytext); return VALUE_DOUBLE; }
 
 L?\"(\\.|[^\\"])*\"                 { yylval.string_val = strdup(yytext); return VALUE_STRING; }
 

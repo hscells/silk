@@ -1,1 +1,5 @@
-(println (+ 1.0 1.0))
+(def test (list 1 2 3))
+(println (rest (test)))
+(println (first (test)))
+
+(println (lambda (list a b) (+ a b)))

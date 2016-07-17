@@ -16,11 +16,16 @@ int main(int argc, char* argv[]) {
 
     runtime = new Runtime();
 
+    new LambdaFunction();
     new AddFunction();
     new PrintlnFunction();
+    new SubtractFunction();
+    new DefFunction();
+    new ListFunction();
+    new FirstFunction();
+    new RestFunction();
 
     if (root) {
-        root->dump();
         root->eval();
     }
 

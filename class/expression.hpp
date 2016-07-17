@@ -2,7 +2,7 @@
 
 #include <stdio.h>
 #include <vector>
-#include "type.hpp"
+#include "runtime.hpp"
 
 class ExpressionList;
 extern Runtime* runtime;
@@ -56,8 +56,17 @@ public:
                     }
                 }
             }
+            if (members->front()->getAtom()->isFunction()) {
+                Function* func = (Function*)(members->front()->getAtom());
+                return func->call(args);
+            }
+
             Symbol* symbol = (Symbol*)(members->front()->getAtom());
-            return runtime->getFunction((Symbol*)members->front()->getAtom())->call(args);
+            if (runtime->functionExists(symbol)) {
+                return runtime->getFunction(symbol)->call(args);
+            }
+
+            throw Exception("Coud not run function");
         }
     }
 };
